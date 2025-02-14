@@ -16,7 +16,9 @@ function App() {
    function handleInputChange(inputIdentifier, inputValue) {
       setUserInput({
          ...userInput,
-         [inputIdentifier]: inputValue, // * Dynamically update the property using the value of inputIdentifier
+         [inputIdentifier]: +inputValue, // * Dynamically update the property using the value of inputIdentifier
+         // * Convert the inputValue to a number using the unary plus operator to avoid concatenation...
+         // * Shorthand way to convert a string to a number in JavaScript...
       });
    }
    return (
