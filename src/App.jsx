@@ -12,6 +12,11 @@ const DEFAULT_USER_INPUT = {
 
 function App() {
    const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);
+   const inputIsValid =
+      userInput.duration >= 1 &&
+      userInput.initialInvestment >= 1 &&
+      userInput.annualInvestment >= 1 &&
+      userInput.expectedReturn >= 1;
 
    function handleInputChange(inputIdentifier, inputValue) {
       setUserInput({
@@ -28,7 +33,11 @@ function App() {
             onChangeInput={handleInputChange}
             userInputValue={userInput}
          />
-         <Result userInputValue={userInput} />
+         {inputIsValid ? (
+            <Result userInputValue={userInput} />
+         ) : (
+            <p className="center">Please enter a valid input...</p>
+         )}
       </>
    );
 }
