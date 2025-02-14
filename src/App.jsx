@@ -1,13 +1,34 @@
-import Header from "./components/Header"
-import UserInput from "./components/UserInput"
+import { useState } from "react";
+import Header from "./components/Header";
+import UserInput from "./components/UserInput";
+import Result from "./components/Result";
+
+const DEFAULT_USER_INPUT = {
+   initialInvestment: 10000,
+   annualInvestment: 1000,
+   expectedReturn: 7,
+   duration: 10,
+};
 
 function App() {
-  return (
-    <>
-    <Header />
-    <UserInput />
-    </>
-  )
+   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);
+
+   function handleInputChange(inputIdentifier, inputValue) {
+      setUserInput({
+         ...userInput,
+         [inputIdentifier]: inputValue, // * Dynamically update the property using the value of inputIdentifier
+      });
+   }
+   return (
+      <>
+         <Header />
+         <UserInput
+            onChangeInput={handleInputChange}
+            userInputValue={userInput}
+         />
+         <Result userInputValue={userInput} />
+      </>
+   );
 }
 
-export default App
+export default App;
